@@ -1,0 +1,20 @@
+:root {
+    --primary-color: #1b4965;     /*  var(--primary-color)        */
+    --secondary-color: #cae9ff;   /*  var(--secondary-color)      */
+  }
+  
+* {
+margin: 0px;
+padding: 0px;
+font-size: 18px;
+}
+
+html {
+box-sizing: border-box;
+}
+
+body {
+background-color: var(--primary-color);
+color: var(--secondary-color);
+height: 100vh;
+}
