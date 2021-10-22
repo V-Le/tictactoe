@@ -3,34 +3,34 @@ const boardContainer = document.querySelector('.boardContainer');
 const boardCells = document.querySelectorAll('.boardCell');
 
 //Create button to empty board
-function clearBoard(){
-    var isBoardCleared;
+function clearBoard() {
+  var isBoardCleared;
 
-    //checks if each cell is empty or not
-    boardCells.forEach(function(boardCell) {
-        if (boardCell.innerHTML !== '') {
-             isBoardCleared = false;
-        };
-    });
-
-    //if board is not empty, creates a button to clear board
-    if (isBoardCleared == false) {
-        const resetBoard = document.createElement('button');
-        resetBoard.innerText = 'Reset';
-        resetBoard.classList.add('resetBtn');
-        mainContainer.appendChild(resetBoard);
-
-        const resetBtn = document.querySelector('.resetBtn');
-        resetBtn.addEventListener('click', function() {
-            boardCells.forEach(function(boardCell) {
-                boardCell.innerHTML = '';
-            })
-        })
-    } else {
-        console.log('Empty');
+  //checks if each cell is empty or not
+  boardCells.forEach(function (boardCell) {
+    if (boardCell.innerHTML !== '') {
+      isBoardCleared = false;
     }
+  });
 
-    
+  //if board is not empty, creates a button to clear board
+  if (isBoardCleared == false) {
+    const resetBoard = document.createElement('button');
+    resetBoard.innerText = 'Reset';
+    resetBoard.classList.add('resetBtn');
+    resetBoard.setAttribute('style', 'margin: 20px; padding: 5px 20px;');
+    mainContainer.appendChild(resetBoard);
+
+    const resetBtn = document.querySelector('.resetBtn');
+    resetBtn.addEventListener('click', function () {
+      boardCells.forEach(function (boardCell) {
+        boardCell.innerHTML = '';
+        resetBtn.remove();
+      });
+    });
+  } else {
+    console.log('Empty');
+  }
 }
 
 clearBoard();
