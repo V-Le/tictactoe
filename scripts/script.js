@@ -3,10 +3,10 @@ const boardContainer = document.querySelector('.boardContainer');
 const boardCells = document.querySelectorAll('.boardCell');
 
 //Create Players X and O with factory
-const Player = (name, peice) => {
+function Player(name, peice) {
   let score = 0;
-  return {name, peice, score};
-};
+  return { name, peice, score };
+}
 
 const player1 = Player('Player 1', 'X');
 const player2 = Player('Player 2', 'O');
