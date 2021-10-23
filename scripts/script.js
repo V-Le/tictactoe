@@ -2,6 +2,15 @@ const mainContainer = document.querySelector('.mainContainer');
 const boardContainer = document.querySelector('.boardContainer');
 const boardCells = document.querySelectorAll('.boardCell');
 
+//Create Players X and O with factory
+const Player = (name, peice) => {
+  let score = 0;
+  return {name, peice, score};
+};
+
+const player1 = Player('Player 1', 'X');
+const player2 = Player('Player 2', 'O');
+
 //Create button to empty board
 function clearBoard() {
   var isBoardCleared;
@@ -35,8 +44,7 @@ function clearBoard() {
 
 clearBoard();
 
-//Create Player X
-//Create Player O
+
 //Create win conditions of 3 X's or O's in a row
 //Start game with Player X allowed to place 1 X on board
 //Allow player X and Player O to alternate turns
