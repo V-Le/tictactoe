@@ -46,9 +46,33 @@ function clearBoard() {
   }
 }
 
-clearBoard();
-
 //Create win conditions of 3 X's or O's in a row
+function checkWinCondition() {
+  if ((boardCells[0].innerText == "X" && boardCells[1].innerText == "X" && boardCells[2].innerText == "X") ||
+      (boardCells[3].innerText == "X" && boardCells[4].innerText == "X" && boardCells[5].innerText == "X") ||
+      (boardCells[6].innerText == "X" && boardCells[7].innerText == "X" && boardCells[8].innerText == "X") ||
+      (boardCells[0].innerText == "X" && boardCells[4].innerText == "X" && boardCells[8].innerText == "X") ||
+      (boardCells[2].innerText == "X" && boardCells[4].innerText == "X" && boardCells[6].innerText == "X") ||
+      (boardCells[0].innerText == "X" && boardCells[3].innerText == "X" && boardCells[6].innerText == "X") ||
+      (boardCells[1].innerText == "X" && boardCells[4].innerText == "X" && boardCells[7].innerText == "X") ||
+      (boardCells[2].innerText == "X" && boardCells[5].innerText == "X" && boardCells[8].innerText == "X")) {
+    return 'Congrats Player 1! You won the match!';
+  }
+
+  if ((boardCells[0].innerText == "O" && boardCells[1].innerText == "O" && boardCells[2].innerText == "O") ||
+      (boardCells[3].innerText == "O" && boardCells[4].innerText == "O" && boardCells[5].innerText == "O") ||
+      (boardCells[6].innerText == "O" && boardCells[7].innerText == "O" && boardCells[8].innerText == "O") ||
+      (boardCells[0].innerText == "O" && boardCells[4].innerText == "O" && boardCells[8].innerText == "O") ||
+      (boardCells[2].innerText == "O" && boardCells[4].innerText == "O" && boardCells[6].innerText == "O") ||
+      (boardCells[0].innerText == "O" && boardCells[3].innerText == "O" && boardCells[6].innerText == "O") ||
+      (boardCells[1].innerText == "O" && boardCells[4].innerText == "O" && boardCells[7].innerText == "O") ||
+      (boardCells[2].innerText == "O" && boardCells[5].innerText == "O" && boardCells[8].innerText == "O")) {
+    return 'Congrats Player 2! You won the match!';
+  }
+  
+}
+
+
 //Start game with Player X allowed to place 1 X on board
 //Allow player X and Player O to alternate turns
 //End game if a win condition is met
