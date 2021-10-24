@@ -11,18 +11,22 @@ function Player(name, peice) {
 const player1 = Player('Player 1', 'X');
 const player2 = Player('Player 2', 'O');
 
-//Create button to empty board
-function clearBoard() {
-  var isBoardCleared;
+//checks if each cell is empty or not
+function isCellEmpty() {
+  var checkedCell = true;
 
-  //checks if each cell is empty or not
   boardCells.forEach(function (boardCell) {
-    if (boardCell.innerHTML !== '') {
-      isBoardCleared = false;
+    if (boardCell.innerText != '') {
+      checkedCell = false;
     }
   });
+  return checkedCell;
+}
 
-  //if board is not empty, creates a button to clear board
+//if board is not empty, creates a button to clear board
+function clearBoard() {
+  var isBoardCleared = isCellEmpty();
+
   if (isBoardCleared == false) {
     const resetBoard = document.createElement('button');
     resetBoard.innerText = 'Reset';
@@ -43,7 +47,6 @@ function clearBoard() {
 }
 
 clearBoard();
-
 
 //Create win conditions of 3 X's or O's in a row
 //Start game with Player X allowed to place 1 X on board
