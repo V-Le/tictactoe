@@ -77,7 +77,8 @@ function checkWinCondition() {
       boardCells[5].innerText == 'X' &&
       boardCells[8].innerText == 'X')
   ) {
-    return 'Congrats Player 1! You won the match!';
+    console.log('Congrats Player 1! You won the match!');
+    clearBoard();
   }
 
   if (
@@ -106,11 +107,12 @@ function checkWinCondition() {
       boardCells[5].innerText == 'O' &&
       boardCells[8].innerText == 'O')
   ) {
-    return 'Congrats Player 2! You won the match!';
+    console.log('Congrats Player 2! You won the match!');
+    clearBoard();
   }
 }
 
-//Start game with Player X allowed to place 1 X on board
+//Allow player X and Player O to alternate turns
 function alternateTurns() {
   var turn = 'X';
   currentTurn.innerText = `Current turn is ${turn}`;
@@ -121,12 +123,14 @@ function alternateTurns() {
         if (e.target.innerText == '') {
           e.target.innerText = player1.peice;
           turn = 'O';
+          checkWinCondition();
           currentTurn.innerText = `Current turn is ${turn}`;
         }
       } else {
         if (e.target.innerText == '') {
           e.target.innerText = player2.peice;
           turn = 'X';
+          checkWinCondition();
           currentTurn.innerText = `Current turn is ${turn}`;
         }
       }
@@ -136,33 +140,8 @@ function alternateTurns() {
 
 alternateTurns();
 
-//Allow player X and Player O to alternate turns
+
 //End game if a win condition is met
 //Give one point to winner and announce winner
 //Allow to reset board to play again
 //First player to score 10 wins the set
-
-/* const buttons = Array.from(buttonsContainer.querySelectorAll('.button'));
-buttons.map(function(button) {
-    button.addEventListener('click', (e) => {
-        switch (e.target.innerText) {
-            case "AC":
-                inputArea.innerText = '';
-                calcArea.innerText = '';
-                tempOne = '';
-                tempTwo = '';
-                break;
-                
-            default:
-                if (inputArea.innerText == finalAnswer) {
-                    calcArea.innerText = '';
-                    inputArea.innerText = '';
-                    inputArea.innerText += e.target.innerText;
-                    break;
-                } else {
-                inputArea.innerText += e.target.innerText;
-                
-                }
-        }
-    }
-} */
