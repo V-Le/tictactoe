@@ -1,6 +1,9 @@
 const mainContainer = document.querySelector('.mainContainer');
 const boardContainer = document.querySelector('.boardContainer');
-const boardCells = document.querySelectorAll('.boardCell');
+const boardCells = document.querySelectorAll('.boardCell'); 
+const currentTurn = document.querySelector('.currentTurn');
+
+//https://stackoverflow.com/questions/32537168/make-players-take-turns-playing-tic-tac-toe-in-javascript?rq=1
 
 //Create Players X and O with factory
 function Player(name, peice) {
@@ -48,52 +51,90 @@ function clearBoard() {
 
 //Create win conditions of 3 X's or O's in a row
 function checkWinCondition() {
-  if ((boardCells[0].innerText == "X" && boardCells[1].innerText == "X" && boardCells[2].innerText == "X") ||
-      (boardCells[3].innerText == "X" && boardCells[4].innerText == "X" && boardCells[5].innerText == "X") ||
-      (boardCells[6].innerText == "X" && boardCells[7].innerText == "X" && boardCells[8].innerText == "X") ||
-      (boardCells[0].innerText == "X" && boardCells[4].innerText == "X" && boardCells[8].innerText == "X") ||
-      (boardCells[2].innerText == "X" && boardCells[4].innerText == "X" && boardCells[6].innerText == "X") ||
-      (boardCells[0].innerText == "X" && boardCells[3].innerText == "X" && boardCells[6].innerText == "X") ||
-      (boardCells[1].innerText == "X" && boardCells[4].innerText == "X" && boardCells[7].innerText == "X") ||
-      (boardCells[2].innerText == "X" && boardCells[5].innerText == "X" && boardCells[8].innerText == "X")) {
+  if (
+    (boardCells[0].innerText == 'X' &&
+      boardCells[1].innerText == 'X' &&
+      boardCells[2].innerText == 'X') ||
+    (boardCells[3].innerText == 'X' &&
+      boardCells[4].innerText == 'X' &&
+      boardCells[5].innerText == 'X') ||
+    (boardCells[6].innerText == 'X' &&
+      boardCells[7].innerText == 'X' &&
+      boardCells[8].innerText == 'X') ||
+    (boardCells[0].innerText == 'X' &&
+      boardCells[4].innerText == 'X' &&
+      boardCells[8].innerText == 'X') ||
+    (boardCells[2].innerText == 'X' &&
+      boardCells[4].innerText == 'X' &&
+      boardCells[6].innerText == 'X') ||
+    (boardCells[0].innerText == 'X' &&
+      boardCells[3].innerText == 'X' &&
+      boardCells[6].innerText == 'X') ||
+    (boardCells[1].innerText == 'X' &&
+      boardCells[4].innerText == 'X' &&
+      boardCells[7].innerText == 'X') ||
+    (boardCells[2].innerText == 'X' &&
+      boardCells[5].innerText == 'X' &&
+      boardCells[8].innerText == 'X')
+  ) {
     return 'Congrats Player 1! You won the match!';
   }
 
-  if ((boardCells[0].innerText == "O" && boardCells[1].innerText == "O" && boardCells[2].innerText == "O") ||
-      (boardCells[3].innerText == "O" && boardCells[4].innerText == "O" && boardCells[5].innerText == "O") ||
-      (boardCells[6].innerText == "O" && boardCells[7].innerText == "O" && boardCells[8].innerText == "O") ||
-      (boardCells[0].innerText == "O" && boardCells[4].innerText == "O" && boardCells[8].innerText == "O") ||
-      (boardCells[2].innerText == "O" && boardCells[4].innerText == "O" && boardCells[6].innerText == "O") ||
-      (boardCells[0].innerText == "O" && boardCells[3].innerText == "O" && boardCells[6].innerText == "O") ||
-      (boardCells[1].innerText == "O" && boardCells[4].innerText == "O" && boardCells[7].innerText == "O") ||
-      (boardCells[2].innerText == "O" && boardCells[5].innerText == "O" && boardCells[8].innerText == "O")) {
+  if (
+    (boardCells[0].innerText == 'O' &&
+      boardCells[1].innerText == 'O' &&
+      boardCells[2].innerText == 'O') ||
+    (boardCells[3].innerText == 'O' &&
+      boardCells[4].innerText == 'O' &&
+      boardCells[5].innerText == 'O') ||
+    (boardCells[6].innerText == 'O' &&
+      boardCells[7].innerText == 'O' &&
+      boardCells[8].innerText == 'O') ||
+    (boardCells[0].innerText == 'O' &&
+      boardCells[4].innerText == 'O' &&
+      boardCells[8].innerText == 'O') ||
+    (boardCells[2].innerText == 'O' &&
+      boardCells[4].innerText == 'O' &&
+      boardCells[6].innerText == 'O') ||
+    (boardCells[0].innerText == 'O' &&
+      boardCells[3].innerText == 'O' &&
+      boardCells[6].innerText == 'O') ||
+    (boardCells[1].innerText == 'O' &&
+      boardCells[4].innerText == 'O' &&
+      boardCells[7].innerText == 'O') ||
+    (boardCells[2].innerText == 'O' &&
+      boardCells[5].innerText == 'O' &&
+      boardCells[8].innerText == 'O')
+  ) {
     return 'Congrats Player 2! You won the match!';
   }
-  
 }
 
 //Start game with Player X allowed to place 1 X on board
-function startGame() {
-  var peice;
-  var odd = 1;
+function alternateTurns() {
+  var turn = 'X';
+  currentTurn.innerText = `Current turn is ${turn}`;
 
-  for(let i = 0; i <= 9; i++) {
-    if (i != odd){
-      peice = 'X';
-    } else {
-      peice = 'O';
-      odd += 2;
-    }
-    boardCells.forEach(function (boardCell) {
-      boardCell.addEventListener('click', function() {
-        boardCell.innerHTML = peice;
-      }) 
+  boardCells.forEach(function (boardCell) {
+    boardCell.addEventListener('click', function (e) {
+      if (turn == 'X') {
+        if (e.target.innerText == '') {
+          e.target.innerText = player1.peice;
+          turn = 'O';
+          currentTurn.innerText = `Current turn is ${turn}`;
+        }
+      } else {
+        if (e.target.innerText == '') {
+          e.target.innerText = player2.peice;
+          turn = 'X';
+          currentTurn.innerText = `Current turn is ${turn}`;
+        }
+      }
     });
-  }
-
+  });
 }
 
-startGame();
+alternateTurns();
 
 //Allow player X and Player O to alternate turns
 //End game if a win condition is met
