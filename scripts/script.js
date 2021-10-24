@@ -72,8 +72,29 @@ function checkWinCondition() {
   
 }
 
-
 //Start game with Player X allowed to place 1 X on board
+function startGame() {
+  var peice;
+  var odd = 1;
+
+  for(let i = 0; i <= 9; i++) {
+    if (i != odd){
+      peice = 'X';
+    } else {
+      peice = 'O';
+      odd += 2;
+    }
+    boardCells.forEach(function (boardCell) {
+      boardCell.addEventListener('click', function() {
+        boardCell.innerHTML = peice;
+      }) 
+    });
+  }
+
+}
+
+startGame();
+
 //Allow player X and Player O to alternate turns
 //End game if a win condition is met
 //Give one point to winner and announce winner
