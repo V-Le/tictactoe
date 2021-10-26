@@ -138,7 +138,11 @@ function alternateTurns() {
   });
 }
 
-alternateTurns();
+function startGame() {
+  alternateTurns();
+  //checkWinCount();
+}
+
 
 
 //End game if a win condition is met
