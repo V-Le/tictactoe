@@ -3,8 +3,6 @@ const boardContainer = document.querySelector('.boardContainer');
 const boardCells = document.querySelectorAll('.boardCell');
 const currentTurn = document.querySelector('.currentTurn');
 
-//https://stackoverflow.com/questions/32537168/make-players-take-turns-playing-tic-tac-toe-in-javascript?rq=1
-
 //Create Players X and O with factory
 function Player(name, peice) {
   let score = 0;
@@ -78,7 +76,7 @@ function checkWinCondition() {
       boardCells[5].innerText == 'X' &&
       boardCells[8].innerText == 'X')
   ) {
-    console.log('Congrats Player 1! You won the match!');
+    currentTurn.innerText = 'Congrats Player 1! You won the match!';
     clearBoard();
   }
 
@@ -108,7 +106,19 @@ function checkWinCondition() {
       boardCells[5].innerText == 'O' &&
       boardCells[8].innerText == 'O')
   ) {
-    console.log('Congrats Player 2! You won the match!');
+    currentTurn.innerText = 'Congrats Player 2! You won the match!';
+    clearBoard();
+  }
+
+  checkTieCondition();
+}
+
+function checkTieCondition(){
+  const isBoardFull = [...boardCells].every(function(cell) { 
+    return cell.innerText.includes('X') || cell.innerText.includes('O')
+  })
+  if (isBoardFull) {
+    currentTurn.innerText = 'Game is a tie';
     clearBoard();
   }
 }
@@ -126,15 +136,17 @@ function alternateTurns() {
           if (e.target.innerText == '') {
             e.target.innerText = player1.peice;
             turn = 'O';
-            checkWinCondition();
+            
             currentTurn.innerText = `Current turn is ${turn}`;
+            checkWinCondition();
           }
         } else {
           if (e.target.innerText == '') {
             e.target.innerText = player2.peice;
             turn = 'X';
-            checkWinCondition();
+            
             currentTurn.innerText = `Current turn is ${turn}`;
+            checkWinCondition();
           }
         }
       },
@@ -145,12 +157,6 @@ function alternateTurns() {
 
 function startGame() {
   alternateTurns();
-  //checkWinCount();
 }
 
 startGame();
-
-//End game if a win condition is met
-//Give one point to winner and announce winner
-//Allow to reset board to play again
-//First player to score 10 wins the set
