@@ -138,7 +138,6 @@ function alternateTurns() {
   });
 }
 
-alternateTurns();
 
 
 //End game if a win condition is met
