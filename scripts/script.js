@@ -77,6 +77,7 @@ function checkWinCondition() {
       boardCells[8].innerText == 'X')
   ) {
     currentTurn.innerText = 'Congrats Player 1! You won the match!';
+    player1.score += 1;
     clearBoard();
   }
 
@@ -107,6 +108,7 @@ function checkWinCondition() {
       boardCells[8].innerText == 'O')
   ) {
     currentTurn.innerText = 'Congrats Player 2! You won the match!';
+    player2.score += 1;
     clearBoard();
   }
 
