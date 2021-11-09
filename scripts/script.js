@@ -2,6 +2,7 @@ const mainContainer = document.querySelector('.mainContainer');
 const boardContainer = document.querySelector('.boardContainer');
 const boardCells = document.querySelectorAll('.boardCell');
 const currentTurn = document.querySelector('.currentTurn');
+const buttons = document.querySelector('.buttons');
 const scorep1 = document.querySelector('.score-p1');
 const scorep2 = document.querySelector('.score-p2');
 var turn = 'X';
@@ -33,18 +34,39 @@ function clearBoard() {
 
   if (isBoardCleared == false) {
     const resetBoard = document.createElement('button');
-    resetBoard.innerText = 'Reset';
+    resetBoard.innerText = 'Reset Board';
     resetBoard.classList.add('resetBtn');
     resetBoard.setAttribute('style', 'margin: 20px; padding: 5px 20px;');
-    mainContainer.appendChild(resetBoard);
+    buttons.appendChild(resetBoard);
+
+    const resetScore = document.createElement('button');
+    resetScore.innerText = 'Reset Score';
+    resetScore.classList.add('resetScoreBtn');
+    resetScore.setAttribute('style', 'margin: 20px; padding: 5px 20px;');
+    buttons.appendChild(resetScore);
 
     const resetBtn = document.querySelector('.resetBtn');
     resetBtn.addEventListener('click', function () {
       boardCells.forEach(function (boardCell) {
         boardCell.innerHTML = '';
-        resetBtn.remove();
-        startGame();
       });
+      resetBtn.remove();
+      resetScoreBtn.remove();
+      startGame();
+    });
+
+    const resetScoreBtn = document.querySelector('.resetScoreBtn');
+    resetScoreBtn.addEventListener('click', function () {
+      boardCells.forEach(function (boardCell) {
+        boardCell.innerHTML = '';
+      });
+      player1.score = 0;
+      player2.score = 0;
+      scorep1.innerHTML = `Player X has won <br> ${player1.score} time(s)`;
+      scorep2.innerHTML = `Player X has won <br> ${player2.score} time(s)`;
+      resetBtn.remove();
+      resetScoreBtn.remove();
+      startGame();
     });
   } else {
     console.log('Empty');
@@ -83,7 +105,7 @@ function checkWinCondition() {
   ) {
     currentTurn.innerText = 'Congrats Player 1! You won the match!';
     player1.score += 1;
-    scorep1.innerHTML = `Player X has won <br> ${player1.score} time(s) `;
+    scorep1.innerHTML = `Player X has won <br> ${player1.score} time(s)`;
     stopGame();
     winnerFound = true;
     console.log('p1 win');
@@ -121,8 +143,7 @@ function checkWinCondition() {
     stopGame();
     winnerFound = true;
     console.log('p2 win');
-  }
-  else {
+  } else {
     if (!winnerFound) {
       checkTieCondition();
     }
