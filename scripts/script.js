@@ -80,7 +80,6 @@ function checkWinCondition() {
     currentTurn.innerText = 'Congrats Player 1! You won the match!';
     player1.score += 1;
     stopGame();
-    clearBoard();
   }
 
   if (
@@ -112,7 +111,6 @@ function checkWinCondition() {
     currentTurn.innerText = 'Congrats Player 2! You won the match!';
     player2.score += 1;
     stopGame();
-    clearBoard();
   }
 
   checkTieCondition();
@@ -125,7 +123,6 @@ function checkTieCondition() {
   if (isBoardFull) {
     currentTurn.innerText = 'Game is a tie';
     stopGame();
-    clearBoard();
   }
 }
 
@@ -133,10 +130,10 @@ function stopGame() {
   boardCells.forEach(function (boardCell) {
     boardCell.removeEventListener('click', turnMouseHander, { once: true });
   });
+  clearBoard();
 }
 
-//Allow player X and Player O to alternate turns
-function alternateTurns() {
+function startGame() {
   turn = 'X';
   currentTurn.innerText = `Current turn is ${turn}`;
 
@@ -145,6 +142,7 @@ function alternateTurns() {
   });
 }
 
+//Allow player X and Player O to alternate turns
 function turnMouseHander(e) {
   if (turn == 'X') {
     if (e.target.innerText == '') {
@@ -161,10 +159,6 @@ function turnMouseHander(e) {
       checkWinCondition();
     }
   }
-}
-
-function startGame() {
-  alternateTurns();
 }
 
 startGame();
