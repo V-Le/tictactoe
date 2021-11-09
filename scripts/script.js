@@ -16,7 +16,7 @@ function Player(name, peice) {
 
 const player1 = Player('Player 1', 'X');
 const player2 = Player('Player 2', 'O');
-const playertie = Player('Tie', '_')
+const playertie = Player('Tie', '_');
 
 //checks if each cell is empty or not
 function isCellEmpty() {
