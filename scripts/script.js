@@ -2,6 +2,8 @@ const mainContainer = document.querySelector('.mainContainer');
 const boardContainer = document.querySelector('.boardContainer');
 const boardCells = document.querySelectorAll('.boardCell');
 const currentTurn = document.querySelector('.currentTurn');
+const scorep1 = document.querySelector('.score-p1');
+const scorep2 = document.querySelector('.score-p2');
 var turn = 'X';
 
 //Create Players X and O with factory
@@ -81,6 +83,7 @@ function checkWinCondition() {
   ) {
     currentTurn.innerText = 'Congrats Player 1! You won the match!';
     player1.score += 1;
+    scorep1.innerHTML = `Player X has won <br> ${player1.score} time(s) `;
     stopGame();
     winnerFound = true;
     console.log('p1 win');
@@ -114,6 +117,7 @@ function checkWinCondition() {
   ) {
     currentTurn.innerText = 'Congrats Player 2! You won the match!';
     player2.score += 1;
+    scorep2.innerHTML = `Player O has won <br> ${player2.score} time(s)`;
     stopGame();
     winnerFound = true;
     console.log('p2 win');
