@@ -51,6 +51,8 @@ function clearBoard() {
 
 //Create win conditions of 3 X's or O's in a row
 function checkWinCondition() {
+  let winnerFound = false;
+
   if (
     (boardCells[0].innerText == 'X' &&
       boardCells[1].innerText == 'X' &&
@@ -80,6 +82,8 @@ function checkWinCondition() {
     currentTurn.innerText = 'Congrats Player 1! You won the match!';
     player1.score += 1;
     stopGame();
+    winnerFound = true;
+    console.log('p1 win');
   }
 
   if (
@@ -111,9 +115,14 @@ function checkWinCondition() {
     currentTurn.innerText = 'Congrats Player 2! You won the match!';
     player2.score += 1;
     stopGame();
+    winnerFound = true;
+    console.log('p2 win');
   }
-
-  checkTieCondition();
+  else {
+    if (!winnerFound) {
+      checkTieCondition();
+    }
+  }
 }
 
 function checkTieCondition() {
