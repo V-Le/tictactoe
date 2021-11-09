@@ -2,6 +2,7 @@ const mainContainer = document.querySelector('.mainContainer');
 const boardContainer = document.querySelector('.boardContainer');
 const boardCells = document.querySelectorAll('.boardCell');
 const currentTurn = document.querySelector('.currentTurn');
+var turn = 'X';
 
 //Create Players X and O with factory
 function Player(name, peice) {
@@ -78,6 +79,7 @@ function checkWinCondition() {
   ) {
     currentTurn.innerText = 'Congrats Player 1! You won the match!';
     player1.score += 1;
+    stopGame();
     clearBoard();
   }
 
@@ -109,52 +111,56 @@ function checkWinCondition() {
   ) {
     currentTurn.innerText = 'Congrats Player 2! You won the match!';
     player2.score += 1;
+    stopGame();
     clearBoard();
   }
 
   checkTieCondition();
 }
 
-function checkTieCondition(){
-  const isBoardFull = [...boardCells].every(function(cell) { 
-    return cell.innerText.includes('X') || cell.innerText.includes('O')
-  })
+function checkTieCondition() {
+  const isBoardFull = [...boardCells].every(function (cell) {
+    return cell.innerText.includes('X') || cell.innerText.includes('O');
+  });
   if (isBoardFull) {
     currentTurn.innerText = 'Game is a tie';
+    stopGame();
     clearBoard();
   }
 }
 
+function stopGame() {
+  boardCells.forEach(function (boardCell) {
+    boardCell.removeEventListener('click', turnMouseHander, { once: true });
+  });
+}
+
 //Allow player X and Player O to alternate turns
 function alternateTurns() {
-  var turn = 'X';
+  turn = 'X';
   currentTurn.innerText = `Current turn is ${turn}`;
 
   boardCells.forEach(function (boardCell) {
-    boardCell.addEventListener(
-      'click',
-      function (e) {
-        if (turn == 'X') {
-          if (e.target.innerText == '') {
-            e.target.innerText = player1.peice;
-            turn = 'O';
-            
-            currentTurn.innerText = `Current turn is ${turn}`;
-            checkWinCondition();
-          }
-        } else {
-          if (e.target.innerText == '') {
-            e.target.innerText = player2.peice;
-            turn = 'X';
-            
-            currentTurn.innerText = `Current turn is ${turn}`;
-            checkWinCondition();
-          }
-        }
-      },
-      { once: true }
-    );
+    boardCell.addEventListener('click', turnMouseHander, { once: true });
   });
+}
+
+function turnMouseHander(e) {
+  if (turn == 'X') {
+    if (e.target.innerText == '') {
+      e.target.innerText = player1.peice;
+      turn = 'O';
+      currentTurn.innerText = `Current turn is ${turn}`;
+      checkWinCondition();
+    }
+  } else {
+    if (e.target.innerText == '') {
+      e.target.innerText = player2.peice;
+      turn = 'X';
+      currentTurn.innerText = `Current turn is ${turn}`;
+      checkWinCondition();
+    }
+  }
 }
 
 function startGame() {
