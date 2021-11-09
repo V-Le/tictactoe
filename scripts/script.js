@@ -5,6 +5,7 @@ const currentTurn = document.querySelector('.currentTurn');
 const buttons = document.querySelector('.buttons');
 const scorep1 = document.querySelector('.score-p1');
 const scorep2 = document.querySelector('.score-p2');
+const scoretie = document.querySelector('.score-tie');
 var turn = 'X';
 
 //Create Players X and O with factory
@@ -15,6 +16,7 @@ function Player(name, peice) {
 
 const player1 = Player('Player 1', 'X');
 const player2 = Player('Player 2', 'O');
+const playertie = Player('Tie', '_')
 
 //checks if each cell is empty or not
 function isCellEmpty() {
@@ -62,8 +64,10 @@ function clearBoard() {
       });
       player1.score = 0;
       player2.score = 0;
+      playertie.score = 0;
       scorep1.innerHTML = `Player X has won <br> ${player1.score} time(s)`;
-      scorep2.innerHTML = `Player X has won <br> ${player2.score} time(s)`;
+      scorep2.innerHTML = `Player O has won <br> ${player2.score} time(s)`;
+      scoretie.innerHTML = `Ties<br>${playertie.score} time(s)`;
       resetBtn.remove();
       resetScoreBtn.remove();
       startGame();
@@ -156,6 +160,8 @@ function checkTieCondition() {
   });
   if (isBoardFull) {
     currentTurn.innerText = 'Game is a tie';
+    playertie.score += 1;
+    scoretie.innerHTML = `Ties<br>${playertie.score} time(s)`;
     stopGame();
   }
 }
